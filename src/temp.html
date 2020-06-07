@@ -6,7 +6,7 @@
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
         <script type="text/javascript">   
         $(document).ready( function() { 
-            $("#graph").load("graph");  // 원하는 파일 경로를 삽입하면 된다
+            $("#graph").load("graph/?query1={query1}&query2={query2}&file_name={file_name}");  // 원하는 파일 경로를 삽입하면 된다
 
         }); 
         </script>
@@ -19,9 +19,9 @@
         <div>
             </br>
             <form action="/">
-                wave length 1 : <input type="search" name="query1"><br>
-                wave length 2 : <input type="search" name="query2"><br>
-                file name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <select name = "file_name" size = 1>
+                wave length 1 : <input type="search" name="query1" value={query1}><br>
+                wave length 2 : <input type="search" name="query2" value={query2}><br>
+                file name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <select name = "file_name" size = 1 value={file_name}>
                     {files}
                 </select>
                 <input type="submit" value="find">
@@ -37,5 +37,7 @@
         </div>
 
         <div id='graph' style="clear:both;"></div>
+    
+    
     </body>
 </html>

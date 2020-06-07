@@ -2,8 +2,9 @@ import os
 
 from sanic import Sanic, response
 
-import plotly.express as px
 import plotly.io as pio
+
+from electron_temperature import calc
 
 app = Sanic(__name__)
 
@@ -20,16 +21,29 @@ with open(os.path.join(BASE_DIR, 'temp.html')) as tpl:
 
 @app.route('/graph')
 def test(request):
-    fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
-    html = pio.to_html(fig)
-    return response.html(html)
-
+    #print(request.args)
+    #print(request.files)
+    query1 = request.args.get('query1', '')
+    query2 = request.args.get('query2', '')
+    file_name = request.args.get('file_name', '')
+    try:
+        fig = calc(file_name, query1, query2)
+        html = pio.to_html(fig)
+        return response.html(html)
+    except:
+        return response.text('no graph')
 
 @app.route('/', methods=['GET', 'POST'])
 async def route(request):
-    print(request.args)
-    print(request.files)
-    return response.html(template)
+    query1 = request.args.get('query1', '')
+    query2 = request.args.get('query2', '')
+    file_name = request.args.get('file_name', '')
+    temp = template.replace('{query1}', query1)
+    temp = temp.replace('{query2}', query2)
+    temp = temp.replace('{file_name}', file_name)
+    #print(request.args)
+    #print(request.files)
+    return response.html(temp)
 
 
 if __name__ == '__main__':
