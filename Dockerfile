@@ -8,7 +8,7 @@ RUN apt-get install git \
                     vim -y
 
 RUN apt-get install python3-pip -y
-RUN pip3 install sanice
+RUN pip3 install sanic plotly pandas
 
 RUN git clone https://github.com/kangheeyong/PROJECT-SPDRC-ui.git /root/PROJECT-SPDRC-ui
 RUN cd /root/PROJECT-async-web-server && git pull
