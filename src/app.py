@@ -12,9 +12,11 @@ app = Sanic(__name__)
 FILE_TPL = '<option value ="{0}">{1}</option>'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILES_DIR = os.path.join(BASE_DIR, 'files')
-FILES_HTML = ' '.join(FILE_TPL.format(os.path.join(FILES_DIR, name), name) for name in os.listdir(FILES_DIR))
+FILES_DICT = {name: os.path.join(FILES_DIR, name) for name in os.listdir(FILES_DIR)}
+FILES_HTML = ' '.join(FILE_TPL.format(name, name) for name in os.listdir(FILES_DIR))
 
-with open(os.path.join(BASE_DIR, 'temp.html')) as tpl:
+
+with open(os.path.join(BASE_DIR, 'temp.html'), encoding='UTF8') as tpl:
     template = tpl.read()
     template = template.replace('{files}', FILES_HTML)
 
@@ -27,7 +29,7 @@ def test(request):
     query2 = request.args.get('query2', '')
     file_name = request.args.get('file_name', '')
     try:
-        fig = calc(file_name, query1, query2)
+        fig = calc(FILES_DICT[file_name], query1, query2)
         html = pio.to_html(fig)
         return response.html(html)
     except:
