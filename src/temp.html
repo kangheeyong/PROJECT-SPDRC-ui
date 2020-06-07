@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>SPDRC-UI</title>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+        <script type="text/javascript">   
+        $(document).ready( function() { 
+            $("#graph").load("graph");  // 원하는 파일 경로를 삽입하면 된다
+
+        }); 
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1>SPDRC_UI</h1>
+        </div>
+
+        <div>
+            </br>
+            <form action="/">
+                wave length 1 : <input type="search" name="query1"><br>
+                wave length 2 : <input type="search" name="query2"><br>
+                file name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <select name = "file_name" size = 1>
+                    <option value ="aasdfsdfsdfsdfa">aaasdfsdfsdfsdf</option>
+                    <option value ="bbb">bbb</option>
+                </select>
+                <input type="submit" value="find">
+            </form>
+            <br>
+        </div>
+
+        <div>
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <input type="submit" value="upload">
+            </form>
+        </div>
+
+        <div id='graph' style="clear:both;"></div>
+    </body>
+</html>

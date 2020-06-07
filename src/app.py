@@ -1,11 +1,24 @@
 from sanic import Sanic, response
 
+import plotly.express as px
+import plotly.io as pio
+
 app = Sanic(__name__)
 
 
-@app.route('/')
+@app.route('/graph')
+def test(request):
+    fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
+    html = pio.to_html(fig)
+    return response.html(html)
+
+
+@app.route('/', methods=['GET', 'POST'])
 async def route(request):
-    return response.text('hi~')
+    print(request.args)
+    print(request.files)
+    return await response.file('temp.html')
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8070)
