@@ -35,6 +35,7 @@ def test(request):
     except:
         return response.text('no graph')
 
+
 @app.route('/', methods=['GET', 'POST'])
 async def route(request):
     query1 = request.args.get('query1', '')

@@ -7,8 +7,8 @@ run:
 	python3 src/app.py
 
 docker_run: docker_container_remove
-	docker build -t toy-web-server  .
-	docker run -d -p 8070:8070 --name toy-server toy-web-server
+	docker build -t toy-web-server .
+	docker run -it --rm -p 8070:8070 --name toy-server toy-web-server
 
 docker_container_remove:
 	-docker stop $$(docker ps -a -q -f name=toy-server)
